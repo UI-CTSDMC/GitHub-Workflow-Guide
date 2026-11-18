@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Started with GitHub | CTSDMC</title>
+
+<style>
+:root {
+  --navy: #18324B;
+  --blue: #456A82;
+  --yellow: #F2D44E;
+  --white: #F8F9FA;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  height: 95px;
+  background: var(--navy);
+  border-bottom: 4px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  gap: 20px;
+  color: white;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 500;
+  border-left: 1px solid rgba(255,255,255,.5);
+  padding-left: 20px;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.header-home {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-home:hover {
+  color: var(--yellow);
+}
+
+.header-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255,255,255,.45);
+}
+
+.header-date {
+  font-size: 15px;
+  letter-spacing: .5px;
+  color: rgba(255,255,255,.75);
+}
+
+/* Main */
+main {
+  min-height: calc(100vh - 95px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 90px 6% 145px;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Bottom waves */
+main::before,
+main::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+main::before {
+  bottom: -100px;
+  height: 210px;
+  background: #8db0c5;
+  opacity: .65;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-3deg);
+}
+
+main::after {
+  bottom: -135px;
+  height: 190px;
+  background: var(--blue);
+  opacity: .9;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(3deg);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+h1 {
+  font-size: clamp(36px, 4.8vw, 64px);
+  font-weight: 350;
+  letter-spacing: -1.3px;
+  margin: 0;
+}
+
+h1 strong {
+  font-weight: 650;
+}
+
+.accent-line {
+  width: 100px;
+  height: 5px;
+  background: var(--yellow);
+  border-radius: 10px;
+  margin: 19px auto 23px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.7vw, 22px);
+  color: var(--blue);
+  margin: 0;
+}
+
+/* Learning cards */
+.learning-cards {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.learning-card {
+  width: 100%;
+  min-height: 135px;
+  background: white;
+  border: 1px solid #e3eaf0;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 25px 45px;
+  text-decoration: none;
+  color: var(--navy);
+  box-shadow: 0 12px 25px rgba(24,50,75,.09);
+  transition: transform .25s ease, box-shadow .25s ease;
+  text-align: left;
+  font: inherit;
+}
+
+.learning-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 17px 30px rgba(24,50,75,.13);
+}
+
+.learning-card svg {
+  width: 65px;
+  height: 65px;
+  flex-shrink: 0;
+  stroke: var(--blue);
+}
+
+.separator {
+  width: 1px;
+  height: 65px;
+  background: #b7c9d5;
+  flex-shrink: 0;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  display: block;
+  font-size: 27px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.card-description {
+  display: block;
+  font-size: 19px;
+  color: var(--blue);
+}
+
+/* Yellow arrows */
+.arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Accordions */
+.accordion {
+  background: white;
+  border: 1px solid #e3eaf0;
+  border-radius: 25px;
+  box-shadow: 0 12px 25px rgba(24,50,75,.09);
+  overflow: hidden;
+  transition: box-shadow .4s ease;
+}
+
+.accordion.is-open {
+  box-shadow: 0 18px 38px rgba(24,50,75,.12);
+}
+
+.accordion .learning-card {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background .4s ease;
+}
+
+.accordion .learning-card:hover {
+  transform: none;
+  box-shadow: none;
+  background: #fcfdfe;
+}
+
+.accordion .learning-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -5px;
+}
+
+/* Smooth collapse animation */
+.accordion-collapse.collapse:not(.show) {
+  display: none;
+}
+
+.accordion-collapse.collapse.show {
+  display: block;
+}
+
+.accordion-collapse.collapsing {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  transition: height .65s ease;
+}
+
+/* Accordion content */
+.accordion-text {
+  margin: 0 45px;
+  padding: 23px 0 30px;
+  border-top: 1px solid #e3eaf0;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--navy);
+}
+
+.accordion-text p {
+  margin: 0 0 15px;
+}
+
+.accordion-text p:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-text a {
+  color: var(--blue);
+  text-underline-offset: 4px;
+}
+
+/* Rotating arrows */
+.accordion-arrow {
+  transition: transform .4s ease;
+}
+
+.accordion.is-open .accordion-arrow {
+  transform: rotate(180deg);
+}
+
+/* Navigation */
+.navigation {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 45px;
+}
+
+.navigation a {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: color .2s;
+}
+
+.navigation a:hover {
+  color: var(--blue);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  main {
+    padding: 55px 20px 130px;
+  }
+
+  header {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .brand {
+    font-size: 19px;
+    padding-left: 12px;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+
+  .header-home {
+    font-size: 13px;
+  }
+
+  .header-date {
+    font-size: 12px;
+  }
+
+  .header-divider {
+    height: 18px;
+  }
+
+  .learning-card {
+    padding: 22px;
+    gap: 18px;
+    min-height: 115px;
+  }
+
+  .learning-card svg {
+    width: 45px;
+    height: 45px;
+  }
+
+  .separator {
+    height: 50px;
+  }
+
+  .card-title {
+    font-size: 19px;
+  }
+
+  .card-description {
+    font-size: 14px;
+  }
+
+  .arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .accordion-text {
+    margin: 0 22px;
+    padding: 20px 0 25px;
+    font-size: 15px;
+  }
+
+  .navigation a {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 24 24"
+       fill="currentColor" aria-label="GitHub logo">
+    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39
+    7.86 10.91.58.11.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36
+    -3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7
+    1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96
+    .1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69
+    0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06
+    0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.8c.98 0 1.96.13
+    2.88.39 2.19-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.77
+    .11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.68 5.4-5.24
+    5.69.41.35.77 1.02.77 2.06v3.05c0 .31.21.68.8.56
+    A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+  </svg>
+
+  <div class="brand">CTSDMC</div>
+
+  <div class="header-right">
+    <a class="header-home" href="index.html">
+      <svg width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"
+          aria-hidden="true">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9v12h14V9"/>
+        <path d="M9 21v-7h6v7"/>
+      </svg>
+      Home
+    </a>
+    <span class="header-divider"></span>
+    <div class="header-date">November 2026</div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Getting Started with <strong>GitHub</strong></h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">
+      Everything you need before starting your first project.
+    </p>
+  </section>
+
+  <section class="learning-cards">
+
+    <!-- Join Organization -->
+    <div class="accordion" id="organization-accordion">
+
+      <button class="learning-card"
+              id="organization-card"
+              type="button"
+              aria-expanded="false"
+              aria-controls="organization-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <circle cx="32" cy="16" r="8"/>
+          <circle cx="12" cy="27" r="6"/>
+          <circle cx="52" cy="27" r="6"/>
+          <path d="M18 54v-7c0-10 6-17 14-17s14 7 14 17v7"/>
+          <path d="M2 51v-5c0-7 4-12 10-12M62 51v-5c0-7-4-12-10-12"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">
+            Join the UI-CTSDMC Organization
+          </span>
+          <span class="card-description">
+            Set up your account and request access
+          </span>
+        </span>
+
+        <span class="arrow accordion-arrow"
+              aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="organization-details"
+           inert>
+
+        <div class="accordion-text">
+          <p>
+            Create a GitHub account at
+            <a href="https://github.com/signup"
+               target="_blank"
+               rel="noopener noreferrer">
+              github.com/signup
+            </a>
+            if you don't already have one.
+          </p>
+
+          <p>
+            Once your account is ready, share your
+            GitHub username or email address with
+            the CTSDMC GitHub administrator to receive
+            an invitation to the
+            <strong>UI-CTSDMC</strong> GitHub organization
+            and access to the appropriate project
+            repositories.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ways to Work -->
+    <div class="accordion" id="ways-accordion">
+
+      <button class="learning-card"
+              id="ways-card"
+              type="button"
+              aria-expanded="false"
+              aria-controls="ways-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             aria-hidden="true">
+          <rect x="9" y="10" width="46" height="34" rx="3"/>
+          <path d="M4 52h56l-6-8H10z"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">
+            Ways to Work with GitHub
+          </span>
+          <span class="card-description">
+            Explore the different ways to access and work with GitHub
+          </span>
+        </span>
+
+        <span class="arrow accordion-arrow"
+              aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="ways-details"
+           inert>
+
+        <div class="accordion-text">
+          <p>
+            There are several ways to work with GitHub,
+            including directly through the GitHub website,
+            using command-line tools, or integrating GitHub
+            with development environments and desktop applications.
+          </p>
+
+          <p>
+            For this guide, we will focus on
+            <strong>GitHub Desktop</strong>, a user-friendly
+            application that provides a visual interface
+            for managing repositories, branches, and changes
+            without requiring command-line experience.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <nav class="navigation">
+    <a href="github_desktop.html">GitHub Desktop →</a>
+  </nav>
+
+</main>
+
+<script>
+const accordions = document.querySelectorAll(".accordion");
+
+accordions.forEach(accordion => {
+  const button = accordion.querySelector(".learning-card");
+  const panel = accordion.querySelector(".accordion-collapse");
+
+  let isOpen = false;
+  let isAnimating = false;
+
+  function finishAnimation() {
+    panel.classList.remove("collapsing");
+    panel.classList.add("collapse");
+    panel.style.height = "";
+
+    if (isOpen) {
+      panel.classList.add("show");
+      panel.removeAttribute("inert");
+    } else {
+      panel.classList.remove("show");
+      panel.setAttribute("inert", "");
+    }
+
+    isAnimating = false;
+  }
+
+  button.addEventListener("click", () => {
+    if (isAnimating) return;
+
+    isAnimating = true;
+
+    if (!isOpen) {
+      panel.classList.remove("collapse", "show");
+      panel.classList.add("collapsing");
+      panel.removeAttribute("inert");
+      panel.style.height = "0px";
+
+      void panel.offsetHeight;
+      panel.style.height = panel.scrollHeight + "px";
+
+      isOpen = true;
+      accordion.classList.add("is-open");
+      button.setAttribute("aria-expanded", "true");
+
+    } else {
+      panel.style.height = panel.scrollHeight + "px";
+      void panel.offsetHeight;
+
+      panel.classList.remove("collapse", "show");
+      panel.classList.add("collapsing");
+      panel.style.height = "0px";
+
+      isOpen = false;
+      accordion.classList.remove("is-open");
+      button.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  panel.addEventListener("transitionend", event => {
+    if (event.target !== panel || event.propertyName !== "height") return;
+    finishAnimation();
+  });
+});
+</script>
+
+</body>
+</html>

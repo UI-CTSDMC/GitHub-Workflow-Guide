@@ -1,0 +1,1104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create a New Project | CTSDMC</title>
+
+<style>
+:root {
+  --navy: #18324B;
+  --blue: #456A82;
+  --yellow: #F2D44E;
+  --white: #F8F9FA;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--white);
+  color: var(--navy);
+  overflow-x: hidden;
+}
+
+/* Header */
+header {
+  height: 95px;
+  background: var(--navy);
+  border-bottom: 4px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+  gap: 20px;
+  color: white;
+}
+
+.logo {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 23px;
+  font-weight: 500;
+  border-left: 1px solid rgba(255,255,255,.5);
+  padding-left: 20px;
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.header-home {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color .2s ease;
+}
+
+.header-home:hover { color: var(--yellow); }
+
+.header-divider {
+  width: 1px;
+  height: 22px;
+  background: rgba(255,255,255,.45);
+}
+
+.header-date {
+  font-size: 15px;
+  letter-spacing: .5px;
+  color: rgba(255,255,255,.75);
+}
+
+/* Main */
+main {
+  min-height: calc(100vh - 95px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 6% 145px;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Bottom waves */
+main::before,
+main::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+main::before {
+  bottom: -100px;
+  height: 210px;
+  background: #8db0c5;
+  opacity: .65;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-3deg);
+}
+
+main::after {
+  bottom: -135px;
+  height: 190px;
+  background: var(--blue);
+  opacity: .9;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(3deg);
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: clamp(36px, 4.8vw, 64px);
+  font-weight: 350;
+  letter-spacing: -1.3px;
+  margin: 0;
+}
+
+h1 strong { font-weight: 650; }
+
+.accent-line {
+  width: 100px;
+  height: 5px;
+  background: var(--yellow);
+  border-radius: 10px;
+  margin: 19px auto 23px;
+}
+
+.subtitle {
+  font-size: clamp(16px, 1.7vw, 22px);
+  color: var(--blue);
+  margin: 0;
+}
+
+/* Cards */
+.learning-cards {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.accordion {
+  background: white;
+  border: 1px solid #e3eaf0;
+  border-radius: 25px;
+  box-shadow: 0 12px 25px rgba(24,50,75,.09);
+  overflow: hidden;
+  transition: box-shadow .4s ease;
+}
+
+.accordion.is-open {
+  box-shadow: 0 18px 38px rgba(24,50,75,.12);
+}
+
+.learning-card {
+  width: 100%;
+  min-height: 115px;
+  background: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  padding: 20px 45px;
+  color: var(--navy);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: background .4s ease;
+}
+
+.learning-card:hover { background: #fcfdfe; }
+
+.learning-card:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -5px;
+}
+
+.learning-card > svg {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  stroke: var(--blue);
+}
+
+.separator {
+  width: 1px;
+  height: 60px;
+  background: #b7c9d5;
+  flex-shrink: 0;
+}
+
+.card-content { flex: 1; }
+
+.card-title {
+  display: block;
+  font-size: 25px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.card-description {
+  display: block;
+  font-size: 17px;
+  color: var(--blue);
+}
+
+.arrow {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+  transition: transform .4s ease;
+}
+
+.accordion.is-open .arrow {
+  transform: rotate(180deg);
+}
+
+/* Smooth accordion animation */
+.accordion-collapse.collapse:not(.show) {
+  display: none;
+}
+
+.accordion-collapse.collapse.show {
+  display: block;
+}
+
+.accordion-collapse.collapsing {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  transition: height .65s ease;
+}
+
+.accordion-body {
+  margin: 0 45px;
+  padding: 26px 0 35px;
+  border-top: 1px solid #e3eaf0;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.accordion-body p { margin: 0 0 17px; }
+
+.content-heading {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 25px 0 10px;
+}
+
+.content-heading:first-child { margin-top: 0; }
+
+/* Screenshot containers */
+.screenshot-frame {
+  width: 100%;
+  background: #f4f7f9;
+  border: 1px solid #dbe5eb;
+  border-radius: 15px;
+  padding: 18px;
+  margin: 22px 0;
+  text-align: center;
+}
+
+.screenshot-frame img {
+  display: block;
+  max-width: 100%;
+  max-height: 520px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 5px;
+  cursor: zoom-in;
+}
+
+.screenshot-caption {
+  display: block;
+  font-size: 14px;
+  color: var(--blue);
+  margin-top: 12px;
+}
+
+.screenshot-placeholder {
+  min-height: 180px;
+  border: 1px dashed #b7c9d5;
+  border-radius: 10px;
+  background: #fafcfd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  color: var(--blue);
+  font-size: 15px;
+  text-align: center;
+}
+
+.note {
+  background: #f8fafb;
+  border-left: 3px solid var(--yellow);
+  padding: 12px 16px;
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Navigation */
+.navigation {
+  width: 100%;
+  max-width: 1050px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 45px;
+}
+
+.navigation a {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  transition: color .2s;
+}
+
+.navigation a:hover { color: var(--blue); }
+
+/* Image viewer */
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,25,40,.9);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 25px 25px;
+}
+
+.image-viewer.is-visible { display: flex; }
+
+.image-viewer img {
+  max-width: 95%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.close-viewer {
+  position: absolute;
+  top: 16px;
+  right: 25px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  main { padding: 55px 20px 130px; }
+
+  header {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .brand {
+    font-size: 19px;
+    padding-left: 12px;
+  }
+
+  .header-right { gap: 10px; }
+  .header-home { font-size: 13px; }
+  .header-home svg { width: 15px; height: 15px; }
+  .header-date { font-size: 12px; }
+  .header-divider { height: 18px; }
+
+  .learning-card {
+    padding: 18px 22px;
+    gap: 18px;
+    min-height: 105px;
+  }
+
+  .learning-card > svg {
+    width: 45px;
+    height: 45px;
+  }
+
+  .separator { height: 50px; }
+  .card-title { font-size: 19px; }
+  .card-description { font-size: 14px; }
+
+  .arrow {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+  }
+
+  .accordion-body {
+    margin: 0 22px;
+    padding: 20px 0 25px;
+    font-size: 15px;
+  }
+
+  .step-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  }
+
+  .navigation a { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <svg class="logo" viewBox="0 0 24 24"
+       fill="currentColor" aria-label="GitHub logo">
+    <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39
+    7.86 10.91.58.11.79-.25.79-.56v-2.15c-3.2.7-3.87-1.36
+    -3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7
+    1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96
+    .1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.69
+    0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06
+    0 0 .97-.31 3.16 1.18A11 11 0 0 1 12 6.8c.98 0 1.96.13
+    2.88.39 2.19-1.49 3.16-1.18 3.16-1.18.63 1.59.23 2.77
+    .11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.68 5.4-5.24
+    5.69.41.35.77 1.02.77 2.06v3.05c0 .31.21.68.8.56
+    A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+  </svg>
+
+  <div class="brand">CTSDMC</div>
+
+  <div class="header-right">
+    <a class="header-home" href="index.html">
+      <svg width="18" height="18" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="m3 10 9-7 9 7"/>
+        <path d="M5 9v12h14V9"/>
+        <path d="M9 21v-7h6v7"/>
+      </svg>
+      Home
+    </a>
+    <span class="header-divider"></span>
+    <div class="header-date">November 2026</div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Create a <strong>New Project</strong></h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">
+      Follow these steps to create, publish, and set up a new repository
+      using GitHub Desktop and GitHub.
+    </p>
+  </section>
+
+  <section class="learning-cards">
+
+    <!-- Create Repository -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="create-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <rect x="12" y="10" width="40" height="32" rx="3"/>
+          <path d="M8 49h48l-5-7H13z"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Create a Repository</span>
+          <span class="card-description">
+            Create a new repository in GitHub Desktop
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="create-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Prepare Your Local Project Folder</h3>
+          <p>
+            Start with a local project folder on your computer.
+            Keep project data, results, and other files that should
+            not be shared through GitHub outside the repository.
+            The repository will be a separate subfolder within
+            your local project folder.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="1.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Prepare a parent project folder for your repository
+            </span>
+          </div>
+
+          <h3 class="content-heading">Create a Local Repository</h3>
+          <p>
+            In GitHub Desktop, select
+            <strong>File → New Repository</strong>.
+            Enter a repository name, such as
+            <strong>Project-XYZ</strong>, and select your
+            parent project folder as the <strong>Local Path</strong>.
+            Select <strong>Initialize this repository with a README</strong>,
+            leave <strong>Git Ignore</strong> as <strong>None</strong>,
+            and click <strong>Create Repository</strong>.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="2.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Create a local repository
+            </span>
+          </div>
+
+          <div class="note">
+            GitHub Desktop automatically creates a new subfolder
+            using the repository name inside the selected Local Path.
+            Only files inside this repository folder are tracked.
+            Do not create the repository subfolder manually beforehand.
+            You do not need to clone a repository you created locally.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Publish Repository -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="publish-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 48H15a13 13 0 0 1-2-26
+                   19 19 0 0 1 37 4
+                   11 11 0 0 1-1 22h-3"/>
+          <path d="M32 55V26M22 36l10-10 10 10"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Publish Your Repository to GitHub</span>
+          <span class="card-description">
+            Share your local repository in the CTSDMC organization
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="publish-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Publish the Repository</h3>
+          <p>
+            Click <strong>Publish Repository</strong> in GitHub Desktop.
+            Select <strong>UI-CTSDMC</strong> as the owner,
+            choose the approved visibility settings, and publish
+            the repository.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="3.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Publish the repository
+            </span>
+          </div>
+
+          <div class="screenshot-frame">
+            <img src="4.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Select UI-CTSDMC as the owner organization
+            </span>
+          </div>
+
+          <div class="note">
+            Confirm that the repository belongs to the correct
+            organization and is set to <strong>Private</strong>.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch Protection -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="protection-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M32 6 51 14v15c0 14-8 23-19 29C21 52 13 43 13 29V14z"/>
+          <path d="m23 32 6 6 13-14"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Set Up Branch Protection</span>
+          <span class="card-description">
+            Configure project-specific requirements for merging into main
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="protection-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Decide Whether Approval Is Required</h3>
+          <p>
+            Before starting project work, confirm whether changes
+            must be reviewed and approved before they are merged
+            into the <strong>main</strong> branch.
+            If approval is required, configure branch protection
+            on GitHub before creating working branches.
+          </p>
+
+          <h3 class="content-heading">Create a Branch Ruleset</h3>
+          <p>
+            Open your repository on the GitHub website.
+            Navigate to <strong>Settings → Rules → Rulesets</strong>
+            and select <strong>New branch ruleset</strong>.
+            Enter a descriptive name, such as
+            <strong>Main Branch Protection</strong>.
+            Set the enforcement status to <strong>Active</strong>
+            and select <strong>Include default branch</strong>
+            to apply the ruleset to <strong>main</strong>.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="5.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Create branch rulset
+            </span>
+          </div>
+
+          <h3 class="content-heading">Configure Review Requirements</h3>
+          <p>
+            Under <strong>Branch rules</strong>, enable
+            <strong>Require a pull request before merging</strong>.
+            Set <strong>Required approvals</strong> to the number
+            specified for your project. This determines how many
+            eligible reviewers must approve a pull request before
+            changes can be merged into <strong>main</strong>.
+          </p>
+
+          <p>
+            Enable <strong>Dismiss stale pull request approvals
+            when new commits are pushed</strong> if previously
+            granted approvals should be dismissed when new commits
+            are added to the pull request.
+          </p>
+
+          <p>
+            If approval from any eligible reviewer is sufficient,
+            leave <strong>Require review from Code Owners</strong>
+            unchecked. If your project requires approval from
+            designated code owners, additional configuration
+            is necessary.
+          </p>
+
+          <p>
+            You may also enable <strong>Restrict deletions</strong>
+            and <strong>Block force pushes</strong> to help protect
+            the main branch. Leave <strong>Restrict updates</strong>
+            unchecked for this training workflow.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="6.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Set up branch rules
+            </span>
+          </div>
+
+          <p>
+            Review the configuration and save the ruleset using
+            <strong>Create</strong> or
+            <strong>Save changes</strong>, as appropriate.
+          </p>
+
+          <div class="note">
+            The number of required approvals depends on the project.
+            For example, a project may require one or multiple
+            eligible reviewers to approve changes before merging.
+            Reviewers must have the appropriate repository permissions.
+            A specific reviewer does not need to be designated
+            when approval from any eligible reviewer is sufficient.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Branch -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="branch-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <circle cx="17" cy="12" r="6"/>
+          <circle cx="17" cy="52" r="6"/>
+          <circle cx="47" cy="17" r="6"/>
+          <path d="M17 18v28M17 37c0-18 30-7 30-14"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Create Your Branch</span>
+          <span class="card-description">
+            Create a branch for your work, such as Lead or Validator
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="branch-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Create and Publish a Working Branch</h3>
+          <p>
+            In GitHub Desktop, select
+            <strong>Current Branch → New Branch</strong>.
+            Create your branch from <strong>main</strong>
+            using the agreed name for your role, such as
+            <strong>Lead</strong> or <strong>Validator</strong>.
+            Click <strong>Create Branch</strong>, and publish your branch.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="7.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Create a working branch
+            </span>
+          </div>
+
+          <div class="screenshot-frame">
+            <img src="8.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Publish your working branch
+            </span>
+          </div>
+
+          <div class="note">
+            Lead and Validator each work independently on their
+            own branch. Confirm that your branch is selected
+            before making changes.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Local Folder -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="folder-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17a5 5 0 0 1 5-5h15l8 8h17
+                   a5 5 0 0 1 5 5v25
+                   a5 5 0 0 1-5 5H12
+                   a5 5 0 0 1-5-5z"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Set Up Your Local Project Folder</span>
+          <span class="card-description">
+            Organize the files you will share through GitHub
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="folder-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Organize Your Local Files</h3>
+          <p>
+            Open your local repository folder (<strong>Repository → Show in Explorer</strong>) and create the
+            files and subfolders needed for your work.
+            Only files that should be version-controlled and
+            shared through GitHub belong inside this folder.
+          </p>
+
+          <p>
+            <strong>Lead and Validator work independently.</strong>
+            Each person organizes the files needed for their
+            own role. You do not need to create your colleague's
+            working folders.
+          </p>
+
+          <p>
+            In this example, the Lead wants to share R and SAS code files through GitHub.
+            Therefore, two folders, R Codes and SAS Codes, are created to organize the corresponding files.
+
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="9.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Create a local project folder for GitHub materials
+            </span>
+          </div>
+
+          <div class="note">
+            Keep sensitive research data, results, credentials,
+            and other files not intended for GitHub outside
+            the repository and in approved storage locations.
+            Git tracks files within the repository, not
+            neighboring folders in the parent project directory.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Commit and Push -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="commit-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M32 46V8M19 21 32 8l13 13"/>
+          <path d="M10 40v14h44V40"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">Commit and Push Your Changes</span>
+          <span class="card-description">
+            Save your work, create a commit, and push it to GitHub
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="commit-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Commit and Push</h3>
+          <p>
+            Save your changes and open the <strong>Changes</strong>
+            tab in GitHub Desktop. Review the files,
+            enter a descriptive commit summary, and select
+            <strong>Commit to your branch</strong>.
+          </p>
+
+          <p>
+            Click <strong>Publish Branch</strong> for the first push,
+            or <strong>Push Origin</strong> for later changes.
+            Repeat this process as you work on the project.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="10.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Commit your changes
+            </span>
+          </div>
+
+          <div class="screenshot-frame">
+            <img src="11.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Push changes to GitHub
+            </span>
+          </div>
+
+          <div class="note">
+            Always check <strong>Current Branch</strong> before
+            committing or pushing changes. Pushing a working
+            branch does not merge its changes into main.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Commit History -->
+    <div class="accordion">
+      <button class="learning-card" type="button"
+              aria-expanded="false" aria-controls="history-details">
+
+        <svg viewBox="0 0 64 64" fill="none"
+             stroke-width="2.5" stroke-linecap="round"
+             stroke-linejoin="round" aria-hidden="true">
+          <path d="M13 24a23 23 0 1 1-2 18"/>
+          <path d="M13 8v16h16"/>
+          <path d="M32 17v17l11 8"/>
+        </svg>
+
+        <span class="separator"></span>
+
+        <span class="card-content">
+          <span class="card-title">View Your Commit History</span>
+          <span class="card-description">
+            Review the history of your changes in GitHub Desktop
+          </span>
+        </span>
+
+        <span class="arrow" aria-hidden="true">↓</span>
+      </button>
+
+      <div class="accordion-collapse collapse"
+           id="history-details" inert>
+        <div class="accordion-body">
+
+          <h3 class="content-heading">Review Commit History</h3>
+          <p>
+            Select your branch and open the <strong>History</strong>
+            tab in GitHub Desktop. Click a commit to see
+            which files were changed and review the recorded changes.
+          </p>
+
+          <div class="screenshot-frame">
+            <img src="12.png" alt="Local project folder" class="step-image">
+            <span class="screenshot-caption">
+              Review the recorded changes
+            </span>
+          </div>
+
+          <div class="note">
+            Commit history provides a record of changes made
+            on the selected branch. Lead and Validator can
+            review their respective histories independently.
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <nav class="navigation">
+    <a href="start_project.html">← Start Working on a Project</a>
+    <a href="best_practices.html">Best Practices →</a>
+  </nav>
+
+</main>
+
+<!-- Screenshot viewer -->
+<div class="image-viewer" id="image-viewer"
+     role="dialog" aria-modal="true"
+     aria-label="Screenshot preview" aria-hidden="true">
+  <button class="close-viewer" id="close-viewer"
+          aria-label="Close screenshot">×</button>
+  <img id="viewer-image" alt="Enlarged screenshot">
+</div>
+
+<script>
+/* Smooth accordions */
+document.querySelectorAll(".accordion").forEach(accordion => {
+  const button = accordion.querySelector(".learning-card");
+  const panel = accordion.querySelector(".accordion-collapse");
+
+  let isOpen = false;
+  let isAnimating = false;
+
+  function finishAnimation() {
+    panel.classList.remove("collapsing");
+    panel.classList.add("collapse");
+    panel.style.height = "";
+
+    if (isOpen) {
+      panel.classList.add("show");
+      panel.removeAttribute("inert");
+    } else {
+      panel.classList.remove("show");
+      panel.setAttribute("inert", "");
+    }
+
+    isAnimating = false;
+  }
+
+  button.addEventListener("click", () => {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    if (!isOpen) {
+      panel.classList.remove("collapse", "show");
+      panel.classList.add("collapsing");
+      panel.removeAttribute("inert");
+      panel.style.height = "0px";
+      void panel.offsetHeight;
+      panel.style.height = panel.scrollHeight + "px";
+
+      isOpen = true;
+      accordion.classList.add("is-open");
+      button.setAttribute("aria-expanded", "true");
+    } else {
+      panel.style.height = panel.scrollHeight + "px";
+      void panel.offsetHeight;
+      panel.classList.remove("collapse", "show");
+      panel.classList.add("collapsing");
+      panel.style.height = "0px";
+
+      isOpen = false;
+      accordion.classList.remove("is-open");
+      button.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  panel.addEventListener("transitionend", event => {
+    if (event.target !== panel || event.propertyName !== "height") return;
+    finishAnimation();
+  });
+});
+
+/* Screenshot zoom */
+const viewer = document.getElementById("image-viewer");
+const viewerImage = document.getElementById("viewer-image");
+const closeViewer = document.getElementById("close-viewer");
+
+document.querySelectorAll(".zoomable").forEach(img => {
+  img.addEventListener("click", () => {
+    if (!img.complete || !img.naturalWidth) return;
+    viewerImage.src = img.src;
+    viewerImage.alt = img.alt;
+    viewer.classList.add("is-visible");
+    viewer.setAttribute("aria-hidden", "false");
+    closeViewer.focus();
+  });
+});
+
+function hideViewer() {
+  viewer.classList.remove("is-visible");
+  viewer.setAttribute("aria-hidden", "true");
+  viewerImage.removeAttribute("src");
+}
+
+closeViewer.addEventListener("click", hideViewer);
+
+viewer.addEventListener("click", event => {
+  if (event.target === viewer) hideViewer();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") hideViewer();
+});
+</script>
+
+</body>
+</html>
