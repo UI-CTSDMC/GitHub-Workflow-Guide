@@ -381,8 +381,10 @@ h1 strong { font-weight: 600; }
       </div>
     </article>
 
+
+
     <!-- Commit and Push -->
-    <article class="practice">
+    <article class="practice" id="commit-practices">
       <div class="practice-icon">
         <svg viewBox="0 0 64 64" aria-hidden="true">
           <circle cx="11" cy="32" r="7"/>
@@ -397,8 +399,35 @@ h1 strong { font-weight: 600; }
           Write meaningful commit messages and push changes regularly
           to maintain a clear version history.
         </p>
+
+        <h3>Commit Messages</h3>
+        <p>
+          Follow the
+          <a href="https://www.conventionalcommits.org/en/v1.0.0/"
+            target="_blank" rel="noopener noreferrer">Conventional Commits</a>
+          format to keep commit messages consistent. For example:
+        </p>
+        <ul>
+          <li><code>feat: add baseline analysis dataset</code></li>
+          <li><code>fix: correct missing value handling</code></li>
+          <li><code>docs: update analysis documentation</code></li>
+        </ul>
+        <p>
+          Copilot can help you draft commit messages in this format,
+          especially when you're getting started.
+        </p>
+
+        <h3>When to Commit</h3>
+        <p>
+          At a minimum, commit after each major step of an analysis,
+          such as creating an analysis dataset, completing an analysis
+          specified in the SAP, or generating a key figure or table.
+          You can commit more frequently for bug fixes and intermediate
+          code revisions.
+        </p>
       </div>
     </article>
+
 
     <!-- Review and Merge -->
     <article class="practice">
